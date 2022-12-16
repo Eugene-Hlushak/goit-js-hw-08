@@ -8,5 +8,19 @@ player.on('timeupdate', throttle(videoCurrentTime, 1000));
 
 function videoCurrentTime(e) {
   localStorage.setItem('videoplayer-current-time', JSON.stringify(e));
-  const time = localStorage.getItem('videoplayer-current-time');
 }
+const currentTime = JSON.parse(
+  localStorage.getItem('videoplayer-current-time')
+);
+player
+  .setCurrentTime(currentTime.seconds)
+  .then(function (seconds) {})
+  .catch(function (error) {
+    switch (error.name) {
+      case 'RangeError':
+        break;
+
+      default:
+        break;
+    }
+  });
